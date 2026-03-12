@@ -182,7 +182,7 @@ type ListPropertyNames = {[string]: {string}}
 
 local IgnoredPropertyNames: ListPropertyNames = {
 	BasePart = {"Position", "Rotation", "Orientation", "BrickColor"},
-	GuiObject = {"BackgroundColor", "BorderColor", "TextColor", "Transparency"}
+	GuiObject = {"BackgroundColor", "BorderColor", "TextColor", "Transparency", "Font"}
 }
 
 -- Some properties does not included in ReflectionService
