@@ -30,7 +30,9 @@ SerializeButton.Click:Connect(function()
 
 				outputScript.Source ..= `"))[1]`
 				outputScript.Name = `Serialized: {instance.Name}`
-				outputScript.Parent = instance.Parent
+				
+				local serviceCheckSuccess, serviceCheckResult = pcall(game.GetService, game, instance.ClassName)
+				outputScript.Parent = if serviceCheckSuccess and serviceCheckResult then instance else instance.Parent
 			end
 		end)
 		
