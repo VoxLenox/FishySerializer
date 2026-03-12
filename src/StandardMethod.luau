@@ -181,7 +181,7 @@ local Formats = {
 type ListPropertyNames = {[string]: {string}}
 
 local IgnoredPropertyNames: ListPropertyNames = {
-	BasePart = {"Position", "Rotation", "Orientation"},
+	BasePart = {"Position", "Rotation", "Orientation", "BrickColor"},
 	GuiObject = {"BackgroundColor", "BorderColor", "TextColor", "Transparency"}
 }
 
@@ -336,7 +336,9 @@ function SerializeInstance(rootInstance: Instance): string
 	
 	local finalSegments: {string} = {}
 	
-	table.insert(finalSegments, table.concat(initializationSegments, "\n"))
+	if #initializationSegments > 0 then
+		table.insert(finalSegments, table.concat(initializationSegments, "\n"))
+	end
 	
 	if #propertiesSegments > 0 then
 		table.insert(finalSegments, table.concat(propertiesSegments, "\n\n"))
@@ -349,8 +351,8 @@ function SerializeInstance(rootInstance: Instance): string
 	if #tagSegments > 0 then
 		table.insert(finalSegments, table.concat(tagSegments, "\n"))
 	end
-
-	return table.concat(finalSegments, "\n\n")
+	
+	return if #finalSegments > 0 then table.concat(finalSegments, "\n\n")..`\n\nreturn {GetReferenceName(rootInstance, references)}` else ""
 end
 
 local SelectionService = game:GetService("Selection")
@@ -375,7 +377,7 @@ SerializeButton.Click:Connect(function()
 				local outputScript = Instance.new("ModuleScript")
 				outputScript.Source = SerializeInstance(instance)
 				outputScript.Name = `Serialized: {instance.Name}`
-				outputScript.Parent = instance.Parent
+				outputScript.Parent = if GetReferenceName(instance) then instance else instance.Parent
 			end
 		end)
 
