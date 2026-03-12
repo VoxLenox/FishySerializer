@@ -2,7 +2,7 @@
 Fishy serializer is a simple instance serialization plugin I made for Roblox. Unlike other several free serializer plugins, Fishy Serializer isn't outdated and it probably gonna stay updated for a long while even without maintenance. Beside serializing properties, this plugin also serialize attributes and tags. Relied entirely on Engine APIs ([ReflectionService](https://create.roblox.com/docs/reference/engine/classes/ReflectionService) and [SerializationService](https://create.roblox.com/docs/reference/engine/classes/SerializationService))
 
 # 🤔 Why're there two version?
-They're both output Luau code but there a key difference in the format of the outputted code
+They both output Luau codes but there a key difference in the format of the outputted codes
 ### Standard version
 This is the recommended version as it's the most stable one, it use the same create-and-set format like other serializers, all data are retrieved from `ReflectionService`. You can get the Roblox plugin of this version [here](https://create.roblox.com/store/asset/79742565115725)
 ### Binary version
