@@ -98,7 +98,7 @@ function SerializeDataType(value: any, references: ReferenceTable?): string
 	elseif valueType == "Content" then
 		local sourceType = value.SourceType
 		if sourceType == Enum.ContentSourceType.Uri then
-			return `Content.new({SerializeDataType(value.Uri)})`
+			return `Content.fromUri({SerializeDataType(value.Uri)})`
 		elseif sourceType == Enum.ContentSourceType.None then
 			return `Content.none`
 		else
