@@ -66,7 +66,13 @@ function SerializeDataType(value: any, references: ReferenceTable?): string
 	elseif valueType == "BrickColor" then
 		return `BrickColor.new({SerializeDataType(value.Name)})`
 	elseif valueType == "CFrame" then
-		return `CFrame.new({table.concat({value:GetComponents()}, ", ")})`
+		local arguments = {value:GetComponents()}
+		
+		for argumentIndex, argumentValue in ipairs(arguments) do
+			arguments[argumentIndex] = SerializeDataType(argumentValue)
+		end
+		
+		return `CFrame.new({table.concat(arguments, ", ")})`
 	elseif valueType == "Color3" then
 		return `Color3.fromRGB({table.concat({
 			SerializeDataType(floor(value.R * 255)),
@@ -182,7 +188,12 @@ type ListPropertyNames = {[string]: {string}}
 
 local IgnoredPropertyNames: ListPropertyNames = {
 	BasePart = {"Position", "Rotation", "Orientation", "BrickColor"},
-	GuiObject = {"BackgroundColor", "BorderColor", "TextColor", "Transparency", "Font"}
+	GuiObject = {"BackgroundColor", "BorderColor", "TextColor", "Transparency", "Font"},
+	Attachment = {
+		"Axis", "Orientation", "Position",
+		"SecondaryAxis", "WorldAxis", "WorldCFrame",
+		"WorldOrientation", "WorldPosition", "WorldSecondaryAxis"
+	}
 }
 
 -- Some properties does not included in ReflectionService
