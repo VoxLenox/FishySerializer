@@ -79,7 +79,7 @@ function SerializeDataType(value: any, references: ReferenceTable?): string
 			SerializeDataType(floor(value.G * 255)),
 			SerializeDataType(floor(value.B * 255))
 		}, ", ")})`
-	elseif valueType == "ColorSequenceKeyPoint" then
+	elseif valueType == "ColorSequenceKeypoint" then
 		return `ColorSequenceKeypoint.new({table.concat({
 			SerializeDataType(value.Time),
 			SerializeDataType(value.Value)
@@ -176,7 +176,7 @@ function SerializeDataType(value: any, references: ReferenceTable?): string
 end
 
 local Formats = {
-	Initialization = "local %s = Instance.new(%s)",
+	Initialization = "const %s = Instance.new(%s)",
 	Property = "%s.%s = %s",
 	SpecialProperty = "%s[%s] = %s",
 	Attribute = "%s:SetAttribute(%s, %s)",
