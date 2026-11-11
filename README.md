@@ -7,3 +7,4 @@ They both output Luau codes but there a key difference in the format of the outp
 This is the recommended version as it's the most stable one, it use the same create-and-set format like other serializers, all data are retrieved from `ReflectionService`. You can get the Roblox plugin of this version [here](https://create.roblox.com/store/asset/79742565115725)
 ### Binary version
 This one use `SerializationService` to convert instances into byte codes (in RBXM format) and then those byte codes get converted into unicodes and then it all get shoved into one script along with the deserialization codes. Although serializing this way will give zero instance mismatch-ness when you deserialize but it is very unstable according to this [documentation](https://create.roblox.com/docs/reference/engine/classes/SerializationService). You can get the Roblox plugin of this version [here](https://create.roblox.com/store/asset/114422747919615)
+ 
